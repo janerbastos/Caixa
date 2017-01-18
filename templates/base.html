@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<html>
+<head>
+	<title>{% block title %} Gestor financeiro - {{titulo}}{% endblock title %}</title>
+	<link href="{% static 'css/portalcustom.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+	<p>Menu</p>
+	<ul>
+		<li><a href="{% url 'plano_conta' %}">Plano de conta</a></li>
+		<li><a href="#">Lançamento de conta</a></li>
+		<li><a href="#">Lançamento de caixa</a></li>
+		<li><a href="#">Pagamento de conta</a></li>
+	</ul>
+
+	{% block content %}
+	
+	{% endblock content %}
+	
+</body>
+</html>

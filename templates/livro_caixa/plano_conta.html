@@ -1,0 +1,40 @@
+{% extends 'livro_caixa/index.html' %}
+
+{% block content %}
+	{% include 'messages.html' %}
+	<p><a href="{% url 'plano_conta' 'novo' %}">Novo plano de contas</a></p>
+	{% if form %}
+		
+		<form method="POST" >
+			 {% csrf_token %}
+			{{ form.as_p}}
+			<input  type="submit" value="Gravar">
+		</form>
+	{% else %}
+	<table border="1" width='100%'>
+		<tbody>
+			<tr><th>Nome</th>
+			<th>Categoria</th>
+			<th>Status</th>
+			<th>Data</th>
+			<th>#</th>
+			</tr>
+			{% if plano_contas %}
+			{% for plano in plano_contas %}
+			<tr>
+				<th>{{plano.nome}}</th>
+				<th>{{plano.categoria}}</th>
+				<th>{{plano.get_status_view}}</th>
+				<th>{{plano.create_at|date:'d/m/Y'}}</th>
+				<th><a href="{% url 'plano_conta' 'editar' plano.id %}">Editar</a> | <a href="{% url 'plano_conta' 'excluir' plano.id %}">Excluir</a></th>
+			</tr>
+			{% endfor %}
+			{% else %}
+				<tr>
+				<th colspan="5">Nenhum registro encontrado</th>
+				</tr>
+			{% endif %}
+		</tbody>
+	</table>
+	{% endif %}
+{% endblock content %}
